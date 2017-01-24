@@ -1,0 +1,219 @@
+$brand-highlight-color: #56b68b;
+$sidebar-width: 12em;
+$header-bg-color: #e57c2d;
+$message-input-border-width: 2px;
+$button-bg-color: $brand-highlight-color;
+$text-select-bg-color: lighten($brand-highlight-color, 25%);
+$sidebar-text-color: #998897;
+$sidebar-text-hover-bg-color: #3e313c;
+$sidebar-text-hover-color: $sidebar-text-color;
+$sidebar-text-active-bg-color: #4c9689;
+$sidebar-text-active-color: #f6faf9;
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: aria, sans-serif;
+  font-size: 16px;
+}
+.user-status {
+  padding: 0 15px;
+}
+.username {
+  &:before {
+    content: '';
+    display: inline-block;
+    margin-right: 3px;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    background: #666;
+  }
+  &.online:before {
+    background: $brand-highlight-color;
+  }
+}
+.chat {
+  display: flex;
+  flex-flow: column wrap;
+  height: 100vh;
+  overflow: hidden;
+  .header {
+    flex: 1;
+    display: block;
+    width: 100%;
+    max-height: 2rem;
+    padding: 0 15px;
+    background: $header-bg-color;
+    color: #fff;
+    vertical-align: middle;
+    h1 {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      line-height: 2rem;
+      vertical-align: middle;
+      font-family: consolas, monospace;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+  }
+  .body {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .sidebar {
+    flex: 1;
+    max-width: $sidebar-width;
+    width: $sidebar-width;
+    overflow-wrap: break-word;
+    padding: 15px 0;
+    background: #4d394b;
+    color: #fff;
+    font-size: 0.8rem;
+    overflow-y: auto;
+  }
+  .sidebar-block {
+    margin-top: 25px;
+    color: $sidebar-text-color;
+    h1 {
+      margin: 0 0 8px 0;
+      padding: 0 15px;
+      font-size: 0.6rem;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      margin: 0 5px 0 0;
+      padding: 0;
+      &.active {
+        a {
+          &, &:hover {
+          color: $sidebar-text-active-color;
+          background: $sidebar-text-active-bg-color;
+          }
+        }
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        padding: 5px 15px;
+        color: $sidebar-text-color;
+        border-radius: 0 3px 3px 0;
+        &:hover {
+          background: $sidebar-text-hover-bg-color;
+          color: $sidebar-text-hover-color;
+        }
+      }
+    }
+  }
+  .main {
+    position: relative;
+    flex: 1 0 auto;
+    align-self: stretch;
+    .viewport {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 50px;
+      background: #fff;
+      padding: 15px;
+      overflow-y: auto;
+      .message {
+        margin: 0 0 10px 0;
+        line-height: 1em;
+        color: #333;
+        font-size: 0.8rem;
+        .from {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        .text {
+
+        }
+      }
+    }
+    .user-input {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 15px;
+      background: #fff;
+      overflow: hidden;
+      .input-group {
+        position: relative;
+        display: block;
+        border: 0;
+        input {
+          display: block;
+          width: 100%;
+          font-size: 1rem;
+          padding: 7px 15px;
+          background: #fff;
+          color: #333;
+          outline: none;
+          transition: all 0.25s ease-in-out;
+          border: $message-input-border-width solid #ccc;
+          border-radius: 5px;
+          &:focus {
+            outline: none;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+          }
+          &::selection {
+            background: $text-select-bg-color;
+          }
+          & + .input-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 2em;
+            border: 0;
+            font-size: 1rem;
+            line-height: 100%;
+            background: #5a635c;
+            color: #fff;
+          }
+        }
+        .input-btn:first-child {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 2em;
+          border: 0;
+          border-radius: 5px 0 0 5px;
+          border: $message-input-border-width solid #ccc;
+          padding: 0;
+          font-size: 1.2rem;
+          line-height: 100%;
+          background: #fff;
+          color: #333;
+          &:hover {
+            background: $button-bg-color;
+            color: #fff;
+            border-color: $button-bg-color;
+          }
+          &:focus {
+            outline: none;
+          }
+          & + input {
+            padding-left: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
