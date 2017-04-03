@@ -74,6 +74,7 @@ class App extends React.Component {
   
   constructor() {
     super();
+    this.drop = this.drop.bind(this);
   }
 
   sendMessage(e) {
@@ -87,13 +88,28 @@ class App extends React.Component {
       this.viewport.scrollIntoView({block:'end'});
     }
   }
+  preventDefault(event) {
+    event.preventDefault();
+  }
+  drop(event) {
+    // TODO: https://enome.github.io/javascript/2014/03/24/drag-and-drop-with-react-js.html
+    event.preventDefault();
+    // console.log('drop', event.nativeEvent.dataTransfer.getData('text'));
+    console.log('drop', event.dataTransfer.items[0], event.dataTransfer.files[0], event.dataTransfer.types[0]);
+    if (event.dataTransfer.files.length) {
+      const { name, size } = event.dataTransfer.files[0];
+      this.props.onSendMessage(`File dragged: ${name} (size: ${(size)} bytes)`, this.props.userProfile.username);
+    }
+      // console.log('drop', event.nativeEvent.dataTransfer);
+    // alert('drop!!');
+  }
   render() {
     
     let { messages, channels, session, onSendMessage, userProfile } = this.props;
     let { username } = userProfile;
 
     return (
-      <div className="chat">
+      <div className="chat" onDragOver={this.preventDefault} onDrop={this.drop}>
         <header className="header">
           <h1>JibberNaut <small> - Yeah it&apos;s a Slack clone ;)</small></h1>
         </header>
